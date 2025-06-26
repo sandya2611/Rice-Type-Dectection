@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Analysis Results - Rice Type Detection{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="page-header">
+        <h1>🔍 Analysis Results</h1>
+        <p>Your rice image has been analyzed</p>
+    </header>
+
+    <div class="results-section">
+        <div class="result-card">
+            <div class="result-header">
+                <h2>Predicted Rice Type</h2>
+            </div>
+            <div class="prediction-result">
+                <div class="rice-type-badge">
+                    <span class="rice-icon">🌾</span>
+                    <span class="rice-name">{{ predicted_class }}</span>
+                </div>
+                <div class="confidence-score">
+                    <span class="confidence-label">Confidence:</span>
+                    <span class="confidence-value">{{ confidence_score }}</span>
+                </div>
+            </div>
+            
+            {% if original_filename %}
+            <div class="file-info">
+                <p><strong>Analyzed file:</strong> {{ original_filename }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="rice-info">
+            <h3>About {{ predicted_class }} Rice</h3>
+            <div class="rice-description">
+                {% if predicted_class == "Arborio" %}
+                    <p>Arborio rice is a short-grain rice variety known for its high starch content and creamy texture when cooked. It's the traditional choice for making risotto due to its ability to absorb liquid while maintaining a firm, chewy center.</p>
+                    <ul>
+                        <li><strong>Origin:</strong> Italy</li>
+                        <li><strong>Grain type:</strong> Short-grain</li>
+                        <li><strong>Best uses:</strong> Risotto, rice pudding</li>
+                    </ul>
+                {% elif predicted_class == "Basmati" %}
+                    <p>Basmati rice is a long-grain aromatic rice variety known for its distinctive fragrance and fluffy texture when cooked. It's a staple in Indian and Pakistani cuisine.</p>
+                    <ul>
+                        <li><strong>Origin:</strong> India/Pakistan</li>
+                        <li><strong>Grain type:</strong> Long-grain</li>
+                        <li><strong>Best uses:</strong> Biryani, pilaf, curry dishes</li>
+                    </ul>
+                {% elif predicted_class == "Ipsala" %}
+                    <p>Ipsala rice is a Turkish long-grain rice variety known for its fluffy texture and mild flavor. It's commonly used in Turkish cuisine and Mediterranean dishes.</p>
+                    <ul>
+                        <li><strong>Origin:</strong> Turkey</li>
+                        <li><strong>Grain type:</strong> Long-grain</li>
+                        <li><strong>Best uses:</strong> Pilaf, stuffed vegetables</li>
+                    </ul>
+                {% elif predicted_class == "Jasmine" %}
+                    <p>Jasmine rice is a long-grain aromatic rice variety with a subtle floral fragrance and slightly sticky texture when cooked. It's a staple in Southeast Asian cuisine.</p>
+                    <ul>
+                        <li><strong>Origin:</strong> Thailand</li>
+                        <li><strong>Grain type:</strong> Long-grain</li>
+                        <li><strong>Best uses:</strong> Thai dishes, stir-fries</li>
+                    </ul>
+                {% elif predicted_class == "Karacadag" %}
+                    <p>Karacadag rice is a Turkish aromatic rice variety known for its distinctive flavor and aroma. It's considered a premium rice variety in Turkish cuisine.</p>
+                    <ul>
+                        <li><strong>Origin:</strong> Turkey</li>
+                        <li><strong>Grain type:</strong> Long-grain</li>
+                        <li><strong>Best uses:</strong> Special occasions, pilaf</li>
+                    </ul>
+                {% else %}
+                    <p>This rice variety has been identified by our AI model. For more specific information about this rice type, please consult rice classification resources.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="{{ url_for('upload_page') }}" class="btn btn-primary">Analyze Another Image</a>
+    </div>
+
+    <div class="disclaimer">
+        <p><strong>Disclaimer:</strong> This analysis is based on AI predictions and should be used for informational purposes only. For critical applications, please consult with rice experts or use additional verification methods.</p>
+    </div>
+</div>
+{% endblock %}

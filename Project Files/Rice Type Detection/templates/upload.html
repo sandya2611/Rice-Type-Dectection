@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Image - Rice Type Detection{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="page-header">
+        <h1>🌾 Upload Rice Image</h1>
+        <p>Upload a clear image of rice grains for classification</p>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="upload-section">
+        <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data" id="uploadForm">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-content">
+                    <div class="upload-icon">📸</div>
+                    <h3>Choose an image or drag it here</h3>
+                    <p>Supported formats: JPG, PNG, GIF, BMP</p>
+                    <p class="file-size-limit">Maximum file size: 10MB</p>
+                    <input type="file" name="image" id="fileInput" accept="image/*" required style="display: none;">
+                    <button type="button" class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        Select Image
+                    </button>
+                </div>
+            </div>
+
+            <div class="file-info" id="fileInfo" style="display: none;">
+                <div class="selected-file">
+                    <span class="file-name" id="fileName"></span>
+                    <button type="button" class="remove-file" onclick="removeFile()">×</button>
+                </div>
+            </div>
+
+            <div class="upload-actions">
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>
+                    <span class="btn-text">Analyze Image</span>
+                    <span class="btn-loading" style="display: none;">Analyzing...</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="upload-tips">
+        <h3>💡 Tips for Best Results</h3>
+        <ul>
+            <li>Use clear, well-lit images</li>
+            <li>Ensure rice grains are clearly visible</li>
+            <li>Avoid blurry or low-resolution images</li>
+            <li>Try to capture multiple grains in the image</li>
+            <li>Use a plain background for better contrast</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const fileInfo = document.getElementById('fileInfo');
+    const fileName = document.getElementById('fileName');
+    const submitBtn = document.getElementById('submitBtn');
+    const uploadForm = document.getElementById('uploadForm');
+
+    // Drag and drop functionality
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('dragover');
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFile(files[0]);
+        }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFile(e.target.files[0]);
+        }
+    });
+
+    function handleFile(file) {
+        if (file.type.startsWith('image/')) {
+            fileName.textContent = file.name;
+            fileInfo.style.display = 'block';
+            submitBtn.disabled = false;
+            fileInput.files = new DataTransfer().files;
+            const dt = new DataTransfer();
+            dt.items.add(file);
+            fileInput.files = dt.files;
+        } else {
+            alert('Please select an image file.');
+        }
+    }
+
+    function removeFile() {
+        fileInput.value = '';
+        fileInfo.style.display = 'none';
+        submitBtn.disabled = true;
+    }
+
+    uploadForm.addEventListener('submit', () => {
+        const btnText = document.querySelector('.btn-text');
+        const btnLoading = document.querySelector('.btn-loading');
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline';
+        submitBtn.disabled = true;
+    });
+</script>
+{% endblock %} 

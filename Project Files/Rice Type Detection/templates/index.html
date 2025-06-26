@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Rice Type Detection{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="hero">
+        <h1>🌾 Rice Type Detection</h1>
+        <p class="subtitle">Advanced AI-powered rice classification system</p>
+        <p class="description">
+            Upload an image of rice and our machine learning model will predict its type. 
+            We can detect 5 different rice varieties: Arborio, Basmati, Ipsala, Jasmine, and Karacadag.
+        </p>
+        <div class="cta-buttons">
+            <a href="{{ url_for('upload_page') }}" class="btn btn-primary">Start Detection</a>
+            <a href="{{ url_for('about') }}" class="btn btn-secondary">Learn More</a>
+        </div>
+    </header>
+
+    <section class="features">
+        <h2>How It Works</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📸</div>
+                <h3>Upload Image</h3>
+                <p>Upload a clear image of rice grains</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Analysis</h3>
+                <p>Our model analyzes the image features</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Get Results</h3>
+                <p>Receive instant classification results</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="rice-types">
+        <h2>Supported Rice Types</h2>
+        <div class="rice-grid">
+            <div class="rice-card">
+                <h3>Arborio</h3>
+                <p>Short-grain rice perfect for risotto</p>
+            </div>
+            <div class="rice-card">
+                <h3>Basmati</h3>
+                <p>Long-grain aromatic rice</p>
+            </div>
+            <div class="rice-card">
+                <h3>Ipsala</h3>
+                <p>Turkish long-grain rice</p>
+            </div>
+            <div class="rice-card">
+                <h3>Jasmine</h3>
+                <p>Fragrant long-grain rice</p>
+            </div>
+            <div class="rice-card">
+                <h3>Karacadag</h3>
+                <p>Turkish aromatic rice variety</p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
