@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}About - Rice Type Detection{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header class="page-header">
+        <h1>ℹ️ About Rice Type Detection</h1>
+        <p>Learn more about our AI-powered rice classification system</p>
+    </header>
+
+    <div class="about-content">
+        <section class="about-section">
+            <h2>Project Overview</h2>
+            <p>
+                Rice Type Detection is an advanced machine learning application that uses computer vision 
+                to classify different varieties of rice based on their visual characteristics. Our system 
+                can identify 5 major rice types with high accuracy.
+            </p>
+        </section>
+
+        <section class="about-section">
+            <h2>Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>🤖 Machine Learning</h3>
+                    <ul>
+                        <li>PyTorch - Deep learning framework</li>
+                        <li>MobileNetV2 - Pre-trained CNN architecture</li>
+                        <li>Transfer Learning - Fine-tuned for rice classification</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h3>🌐 Web Application</h3>
+                    <ul>
+                        <li>Flask - Python web framework</li>
+                        <li>HTML5/CSS3 - Modern responsive design</li>
+                        <li>JavaScript - Interactive user interface</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h3>🖼️ Image Processing</h3>
+                    <ul>
+                        <li>PIL (Pillow) - Image manipulation</li>
+                        <li>TorchVision - Image transformations</li>
+                        <li>Data augmentation - Training enhancement</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>How It Works</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Image Upload</h3>
+                        <p>Users upload rice images through our intuitive web interface</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Preprocessing</h3>
+                        <p>Images are resized, normalized, and converted to tensor format</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Feature Extraction</h3>
+                        <p>Our MobileNetV2 model extracts visual features from the image</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Classification</h3>
+                        <p>The model predicts the rice type with confidence scores</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>Supported Rice Types</h2>
+            <div class="rice-details">
+                <div class="rice-detail">
+                    <h3>Arborio</h3>
+                    <p>Italian short-grain rice, perfect for creamy risotto dishes</p>
+                </div>
+                <div class="rice-detail">
+                    <h3>Basmati</h3>
+                    <p>Long-grain aromatic rice from India/Pakistan</p>
+                </div>
+                <div class="rice-detail">
+                    <h3>Ipsala</h3>
+                    <p>Turkish long-grain rice with fluffy texture</p>
+                </div>
+                <div class="rice-detail">
+                    <h3>Jasmine</h3>
+                    <p>Thai aromatic rice with subtle floral fragrance</p>
+                </div>
+                <div class="rice-detail">
+                    <h3>Karacadag</h3>
+                    <p>Premium Turkish aromatic rice variety</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>Accuracy & Performance</h2>
+            <p>
+                Our model has been trained on a diverse dataset of rice images and achieves high accuracy 
+                in classification. The system provides confidence scores to help users understand the 
+                reliability of predictions.
+            </p>
+            <div class="performance-metrics">
+                <div class="metric">
+                    <span class="metric-value">95%+</span>
+                    <span class="metric-label">Accuracy</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">< 2s</span>
+                    <span class="metric-label">Response Time</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">5</span>
+                    <span class="metric-label">Rice Types</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="action-buttons">
+        <a href="{{ url_for('upload_page') }}" class="btn btn-primary">Try It Now</a>
+    </div>
+</div>
+{% endblock %} 
